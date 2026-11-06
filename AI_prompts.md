@@ -185,3 +185,23 @@ Filled the **Actual** section on each ticket tab of `output/desk_tickets.html` w
 (Added a "How to check me" note and 18 **Evidence** link rows to the Reflection. Every grade, every Actual-vs-Expected row, each one-agent point, each of the 6 new problems, and the bottom line now link to their proof on the same page: the ticket tab (its Expected plan, Actual hand-offs, tools table, refused PO, drafts) or the Cash tab ($3,400.00 → −$840.00 → −$2,400.00 → $160.00, approvals #1–#4). Made in-page links switch tabs (hashchange) and tested it: Cash link → Cash tab, Back → Reflection, 103 link → Ticket 103, with no page errors.)
 
 **Follow-up:** none needed
+
+## Problem 11: Submit to GitHub
+
+**Prompt:**
+> push code to apublic github and follow all additional instruvcitons. provide url
+
+(Added:
+- `.gitignore`: keeps out the real `.env`, `node_modules` and `.claude/`.
+- `.env.example`: a placeholder key.
+- A root `README.md`: copy the original DB to the working copy for a clean run, start the MCP server, start the FastAPI backend, start the React board, and reset before a full three-ticket run.
+- A rewritten `frontend/README.md`.
+
+Renamed `frontend/.env` to `.env.development`; it holds only the backend URL. Committed 124 files in the expected layout, with **both** databases in `data/`. Scanned every file, images included: the real Portkey key appears nowhere. Created the **public** repo `matthewfnye413/hw5` on github.com after I signed in, pushed `main`, and confirmed with an anonymous clone that every expected file is there and no `.env` is. The URL is saved in `output/github_url.txt`.)
+
+**Follow-up:**
+> signed in
+
+*What was lacking:* the `gh` tool isn't installed and the browser pane wasn't signed in to GitHub, so the repo couldn't be created until I signed in myself.
+
+**Repo URL:** https://github.com/matthewfnye413/hw5

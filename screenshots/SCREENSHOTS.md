@@ -183,3 +183,9 @@
 **Problem 10 Panel B: every reflection answer tied to this app, with evidence links to the Ticket 101/102/103 and Cash tabs** (file:///C:/Users/matth/Desktop/AI%20COURSE/AI_HW5/output/desk_tickets.html#reflection, 2026-11-06 00:24)
 
 ![Problem 10 Panel B: every reflection answer tied to this app, with evidence links to the Ticket 101/102/103 and Cash tabs](problem10b.png)
+
+## Problem 11
+
+**Problem 11: public repo github.com/matthewfnye413/hw5 with the expected layout** (https://github.com/matthewfnye413/hw5, 2026-11-06 00:33)
+
+![Problem 11: public repo github.com/matthewfnye413/hw5 with the expected layout](problem11.png)
