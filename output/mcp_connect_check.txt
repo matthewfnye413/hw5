@@ -1,0 +1,24 @@
+
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                                                                             │
+│                                                                             │
+│                        ▄▀▀ ▄▀█ █▀▀ ▀█▀ █▀▄▀█ █▀▀ █▀█                        │
+│                        █▀  █▀█ ▄▄█  █  █ ▀ █ █▄▄ █▀▀                        │
+│                                                                             │
+│                                                                             │
+│                                                                             │
+│                                FastMCP 4.1.6                                │
+│                            https://gofastmcp.com                            │
+│                                                                             │
+│                 🖥  Server:      campus-customs, 4.1.6                       │
+│                 🚀 Deploy free: https://horizon.prefect.io                  │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+
+[11/05/26 23:26:31] INFO     Starting MCP server               transport.py:241
+                             'campus-customs' with transport                   
+                             'stdio'                                           
+connected; tools: ['list_open_tickets', 'check_stock', 'get_cash_balance']
+open_count 3

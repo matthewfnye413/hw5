@@ -1,0 +1,7 @@
+Problem 2: Study the Campus Customs database
+
+Prompt:
+open the data file and follow all additional instructions in the snip
+
+Panel B prompt:
+start the output file and follow all additional instructions in the snip

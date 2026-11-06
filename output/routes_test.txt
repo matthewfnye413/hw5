@@ -1,0 +1,38 @@
+Backend route test: uvicorn backend.main:app --port 8000   (all agents on gpt-6-luna)
+=============================================================================
+
+GET  /api/tickets                 -> 200  2026-08-31  [(101,'open','open'), (102,'open','open'), (103,'open','open')]  open 3 resolved 0
+GET  /api/cash                    -> 200  {"account":"checking","balance":3400.0,"as_of":"2026-08-31"}
+POST /api/tickets/999/run         -> 404  "No ticket 999."
+POST /api/tickets/101/run         -> 202  {"run_id":"ea94ff08a78b","ticket_id":101,"status":"running","model":"gpt-6-luna"}
+POST /api/tickets/103/run         -> 409  "The team is already working ticket 101 (run ea94ff08a78b)."
+
+GET  /api/events?run_id=ea94ff08a78b   (polled while the team worked; agent | what it said | tools)
+  boss        | Got task: Work ticket 101 ...                                   | []
+  boss        |                                                                 | [get_ticket]
+  boss        | Asked inventory: ... CC-TEE-WHITE size S ... identify restock   | [delegate, delegate]
+    inventory | Got task: ... restock vendor ...                                | []
+    accounting| Got task: ... inspect invoice 501 ($840, due 2026-08-28) ...    | []
+    inventory |                                                                 | [get_ticket, check_stock, list_vendors]
+    accounting|                                                                 | [get_cash_balance, list_invoices, get_ticket]
+    accounting| Asked inventory: does paying invoice 501 unblock Bulldog ...    | [list_vendors, delegate]
+      inventory | Yes - Bulldog Print Co is the apparel reprint vendor ...       | [get_ticket, check_stock, list_vendors]
+    accounting|                                                                 | [request_payment_approval]
+    accounting| Payment is feasible: $3,400 - $840 = $2,560. Approval #1 ...    | []
+    customer_service ... save_customer_draft ...;  boss ... update_ticket_status
+
+GET  /api/runs/ea94ff08a78b       -> 200  status done, 38,400 tokens, 16 requests, 19 tool calls
+     decision: tee S out of stock; invoice 501 $840 overdue; approval #1 PENDING; draft #1 saved (not sent);
+     final_status waiting_approval
+
+POST /api/approvals/1/approve {"approved_by":"accounting"}         -> 403 "Approvals must come from a named person, not an agent."
+POST /api/approvals/1/approve {"approved_by":"Route Test (human)"} -> 200 paid $840 to Bulldog Print Co,
+     payment_id 1, approved_by "Route Test (human)", invoice 501 -> paid, checking 3400.0 -> 2560.0
+POST /api/approvals/1/approve (again)                              -> 409 "Approval 1 is already paid."
+GET  /api/cash                    -> 200  balance 2560.0
+GET  /api/drafts?ticket_id=101    -> draft #1 to Tauhid Zaman "Update on your Bulldog tee" (saved, never sent)
+
+POST /api/reset                   -> 200  {"reset":true,"checking":3400.0, tickets 101/102/103 all "open", "audit_entries_kept":70}
+GET  /api/cash                    -> 200  balance 3400.0
+GET  /api/approvals               -> 200  {"approvals":[]}
+Audit trail: 70 entries kept (append-only, not wiped by reset).

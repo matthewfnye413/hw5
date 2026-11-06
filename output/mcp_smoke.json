@@ -1,0 +1,140 @@
+{
+  "test": "MCP smoke test: each campus-customs tool called from Claude Code (vibe coder) via .mcp.json",
+  "student_prompt": "test the 3 tools and follow all additional instructions",
+  "server": "campus-customs (stdio: python mcp_server/server.py)",
+  "database": "data/campus_customs_new.db",
+  "run_date_shop_today": "2026-08-31",
+  "results": [
+    {
+      "ticket": 101,
+      "prompt": "test the 3 tools and follow all additional instructions",
+      "question_tested": "Which tickets are open on the board, and what is the shop's date today?",
+      "tool": "list_open_tickets",
+      "arguments": {},
+      "output": {
+        "date_today": "2026-08-31",
+        "open_count": 3,
+        "tickets": [
+          {
+            "id": 101,
+            "type": "customer_order",
+            "requester": "Tauhid Zaman",
+            "subject": "Bulldog tee",
+            "sku": "CC-TEE-WHITE",
+            "size": "S",
+            "qty": 1,
+            "lease_id": null,
+            "invoice_id": 501,
+            "status": "open",
+            "notes": "Needs a tee in size S.",
+            "created_at": "2026-08-31T09:15:00-04:00"
+          },
+          {
+            "id": 102,
+            "type": "rent_notice",
+            "requester": "Elm City Properties",
+            "subject": "Rent due",
+            "sku": null,
+            "size": null,
+            "qty": null,
+            "lease_id": 1,
+            "invoice_id": null,
+            "status": "open",
+            "notes": "Email: shop rent due in 2 days.",
+            "created_at": "2026-08-31T11:05:00-04:00"
+          },
+          {
+            "id": 103,
+            "type": "price_override",
+            "requester": "Yale AI Club",
+            "subject": "Bulk hoodie discount",
+            "sku": "CC-HOOD-NAVY",
+            "size": "M",
+            "qty": 20,
+            "lease_id": null,
+            "invoice_id": null,
+            "status": "open",
+            "notes": "Student org wants 20 hoodies, size M, asking for a bulk discount.",
+            "created_at": "2026-08-31T16:55:00-04:00"
+          }
+        ]
+      },
+      "db_check": {
+        "query": "SELECT ... FROM tickets WHERE status='open'; SELECT date_today FROM desk",
+        "db_values": {
+          "date_today": "2026-08-31",
+          "open_ticket_ids": [
+            101,
+            102,
+            103
+          ],
+          "ticket_101_invoice_id": 501
+        },
+        "matches_db": true
+      }
+    },
+    {
+      "ticket": 103,
+      "prompt": "test the 3 tools and follow all additional instructions",
+      "question_tested": "How many Basic Hoodie Big Yale (CC-HOOD-NAVY) are in stock in size M?",
+      "tool": "check_stock",
+      "arguments": {
+        "sku": "CC-HOOD-NAVY",
+        "size": "M"
+      },
+      "output": {
+        "sku": "CC-HOOD-NAVY",
+        "name": "Basic Hoodie Big Yale",
+        "sizes": [
+          {
+            "size": "M",
+            "qty": 8,
+            "location": "Aisle A"
+          }
+        ],
+        "total_qty": 8
+      },
+      "db_check": {
+        "query": "SELECT * FROM inventory WHERE sku='CC-HOOD-NAVY' AND size='M'",
+        "db_values": {
+          "sku": "CC-HOOD-NAVY",
+          "name": "Basic Hoodie Big Yale",
+          "size": "M",
+          "qty": 8,
+          "location": "Aisle A"
+        },
+        "matches_db": true
+      }
+    },
+    {
+      "ticket": 102,
+      "prompt": "test the 3 tools and follow all additional instructions",
+      "question_tested": "How much cash is in the checking account right now?",
+      "tool": "get_cash_balance",
+      "arguments": {
+        "account": "checking"
+      },
+      "output": {
+        "date_today": "2026-08-31",
+        "accounts": [
+          {
+            "name": "checking",
+            "balance": 3400,
+            "date": "2026-08-31"
+          }
+        ],
+        "total_balance": 3400
+      },
+      "db_check": {
+        "query": "SELECT * FROM cash_accounts WHERE name='checking'",
+        "db_values": {
+          "name": "checking",
+          "balance": 3400.0,
+          "date": "2026-08-31"
+        },
+        "matches_db": true
+      }
+    }
+  ],
+  "all_match_db": true
+}

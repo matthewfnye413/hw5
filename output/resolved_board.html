@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Resolved Ticket Board</title>
+<style>
+  :root { --navy:#00356b; --ink:#1b2430; --muted:#637083; --paper:#f6f3ee; --card:#fff; --line:#e4ded4; --ok:#1f7a4d; --ok-bg:#e5f4ec; --stop:#b0262f; --warn:#9a5b00; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:"Segoe UI",Arial,sans-serif; color:var(--ink); background:var(--paper); line-height:1.5; }
+  header { background:linear-gradient(90deg,#0b1f3a,var(--navy)); color:#fff; padding:22px 24px; }
+  header h1 { margin:0; font-size:24px; }
+  header p { margin:4px 0 0; color:#c9d6e8; font-size:14px; }
+  nav { display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
+  nav a { color:#fff; text-decoration:none; background:rgba(255,255,255,.12); padding:4px 12px; border-radius:999px; font-size:14px; }
+  main { max-width:1200px; margin:0 auto; padding:20px 16px 48px; }
+  .totals { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:12px; margin-bottom:20px; }
+  .totals div { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:10px 14px; }
+  .totals b { display:block; font-size:22px; }
+  .totals span { font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:.05em; }
+  section { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:18px 20px; margin-bottom:24px; box-shadow:0 4px 18px rgba(20,30,50,.06); }
+  section h2 { margin:0 0 6px; color:var(--navy); display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  .badge { font-size:12px; font-weight:700; padding:2px 9px; border-radius:999px; background:var(--ok-bg); color:var(--ok); text-transform:uppercase; }
+  .facts { display:flex; flex-wrap:wrap; gap:6px; margin:8px 0 12px; }
+  .facts span { background:#f1ede6; border-radius:999px; padding:2px 10px; font-size:13px; }
+  .neg { color:var(--stop); font-weight:700; }
+  p.outcome { margin:6px 0 12px; }
+  figure { margin:0; }
+  figure img { width:100%; height:auto; border:1px solid var(--line); border-radius:10px; display:block; }
+  figcaption { font-size:13px; color:var(--muted); margin-top:6px; }
+  footer { text-align:center; color:var(--muted); font-size:12px; padding:12px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Campus Customs: Resolved Ticket Board</h1>
+  <p>Screenshots of the React ops desk (frontend/, http://localhost:5173) after the full run on 2026-11-06 · all agents on gpt-6-luna · approvals by Matt Nye</p>
+  <nav><a href="#t101">Ticket 101</a><a href="#t102">Ticket 102</a><a href="#t103">Ticket 103</a></nav>
+</header>
+<main>
+  <div class="totals">
+    <div><span>Starting checking</span><b>$3,400.00</b></div>
+    <div><span>Paid out (2 approvals)</span><b class="neg">−$3,240.00</b></div>
+    <div><span>Ending checking</span><b>$160.00</b></div>
+    <div><span>Tickets resolved</span><b>3 / 3</b></div>
+  </div>
+
+  <section id="t101">
+    <h2>Ticket 101: Bulldog tee <span class="badge">Resolved</span></h2>
+    <div class="facts"><span>Boss → Inventory, Accounting, Customer Service</span><span>Facilities not called</span><span>38,400 tokens</span><span>Approval #1 invoice 501, paid by Matt Nye</span><span class="neg">Cash −$840.00 → $2,560.00</span></div>
+    <p class="outcome">Tee size S was out of stock. Bulldog Print Co wouldn&rsquo;t ship while overdue invoice 501 was unpaid, so the team requested payment, and Matt Nye approved it. Customer draft #1 to Tauhid Zaman is saved and not sent.</p>
+    <figure><img src="resolved_board_images/ticket101.png" alt="React board showing ticket 101 resolved, with the agent stage, conversation and per-agent summary"><figcaption>The board on ticket 101: resolved badge, agent stage (Facilities greyed out), hand-offs, conversation, what each agent did, and draft #1.</figcaption></figure>
+  </section>
+
+  <section id="t102">
+    <h2>Ticket 102: Rent due <span class="badge">Resolved</span></h2>
+    <div class="facts"><span>Boss → Facilities → Accounting</span><span>Inventory and Customer Service not called</span><span>19,798 tokens</span><span>Approval #2 rent, paid by Matt Nye</span><span class="neg">Cash −$2,400.00 → $160.00</span></div>
+    <p class="outcome">Facilities confirmed $2,400 rent due 2026-09-02 from lease 1, and Accounting requested the payment. Matt Nye approved it. The lease&rsquo;s next due date moved to 2026-10-02.</p>
+    <figure><img src="resolved_board_images/ticket102.png" alt="React board showing ticket 102 resolved, with Facilities and Accounting involved"><figcaption>The board on ticket 102: only Boss, Facilities and Accounting lit; the ledger shows both payments approved by Matt Nye; checking $160.00.</figcaption></figure>
+  </section>
+
+  <section id="t103">
+    <h2>Ticket 103: Bulk hoodie discount <span class="badge">Resolved</span></h2>
+    <div class="facts"><span>Boss → Inventory, Accounting, Customer Service (7 hand-offs)</span><span>Facilities not called</span><span>69,661 tokens</span><span>Discount #3 $40 × 20 pending</span><span>Duplicate #4 rejected</span><span>Cash $0.00</span></div>
+    <p class="outcome">Only 8 of 20 size-M hoodies are in stock. The Boss offered $40 each (31% off, above the $22 cost), and that discount is still pending. The 12-unit restock ($264) was refused by the MCP tool while invoice 501 was open, and it can&rsquo;t be afforded with $160 left. Customer draft #2 is saved and not sent.</p>
+    <figure><img src="resolved_board_images/ticket103.png" alt="React board showing ticket 103 resolved with seven hand-offs and the discount approval pending"><figcaption>The board on ticket 103: seven hand-offs, the discount approval still waiting, and the approval history (#1 and #2 paid, #4 rejected).</figcaption></figure>
+  </section>
+</main>
+<footer>Campus Customs Multi-Agent Operations · HW5 · images in output/resolved_board_images/</footer>
+</body>
+</html>

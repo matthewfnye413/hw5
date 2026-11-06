@@ -1,0 +1,7 @@
+Problem 3: Build the MCP server
+
+Prompt:
+write an mcp server and follow all additional instructions in snip
+
+Panel B prompt:
+In outputs, list the 3 mcp tools and follow all additonal instructions

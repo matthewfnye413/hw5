@@ -1,0 +1,36 @@
+Live team test: python -m backend.team --ticket 102   (model gpt-6-luna via Portkey)
+
+Delegation chain seen in output/audit_trail.json (depth agent <- caller | step node | tools):
+boss             <- None       |  1 UserPrompt                
+boss             <- None       |  2 ModelRequest              
+boss             <- None       |  3 CallTools    tool_call    get_ticket
+boss             <- None       |  4 ModelRequest              
+boss             <- None       |  5 CallTools    tool_call    delegate
+  facilities       <- boss       |  1 UserPrompt                
+  facilities       <- boss       |  2 ModelRequest              
+  facilities       <- boss       |  3 CallTools    tool_call    get_lease
+  facilities       <- boss       |  4 ModelRequest              
+  facilities       <- boss       |  5 CallTools    tool_call    delegate
+    accounting       <- facilities |  1 UserPrompt                
+    accounting       <- facilities |  2 ModelRequest              
+    accounting       <- facilities |  3 CallTools    tool_call    get_cash_balance
+    accounting       <- facilities |  4 ModelRequest              
+    accounting       <- facilities |  5 CallTools    tool_call    request_payment_approval
+    accounting       <- facilities |  6 ModelRequest              
+    accounting       <- facilities |  7 CallTools    final_answer final_result
+    accounting       <- facilities |  8 End          final_answer 
+  facilities       <- boss       |  6 ModelRequest              
+  facilities       <- boss       |  7 CallTools    final_answer final_result
+  facilities       <- boss       |  8 End          final_answer 
+boss             <- None       |  6 ModelRequest              
+boss             <- None       |  7 CallTools    tool_call    list_approvals
+boss             <- None       |  8 ModelRequest              
+boss             <- None       |  9 CallTools    tool_call    update_ticket_status
+boss             <- None       | 10 ModelRequest              
+boss             <- None       | 11 CallTools    final_answer final_result
+boss             <- None       | 12 End          final_answer 
+
+Result: Boss -> Facilities (get_lease) -> Accounting (get_cash_balance, request_payment_approval)
+Approval #1 rent $2,400 to Elm City Properties = PENDING human approval; no payment made; checking still $3,400.
+Ticket 102 status set to waiting_approval by the Boss. Tokens 22,726 / 11 requests / 8 tool calls.
+Database reset afterwards (copied data/campus_customs.db over data/campus_customs_new.db).

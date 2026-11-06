@@ -1,0 +1,10 @@
+Problem 9: Resolve the tickets
+
+Prompt:
+reset the working database and follow all addtional instructions here
+
+Follow-up prompt:
+Fix it now
+
+Panel B prompt:
+on the cash tab itemize the money and follow all additional instructions

@@ -1,0 +1,7 @@
+Problem 1: Vibe coder prompts
+
+Prompt:
+create the prompt file
+
+Panel B prompt:
+one section for each problem and follow any additional instructions in the snip

@@ -1,0 +1,7 @@
+Problem 4: Add the MCP server to vibe coder and test each tool
+
+Prompt:
+Add MCP server to claude so that you can call the tools. follow all additional instructions
+
+Panel B prompt:
+test the 3 tools and follow all additional instructions

@@ -1,0 +1,7 @@
+Problem 8: Agent dashboard
+
+Prompt:
+build the frontend dashboard in accordance w these instructions
+
+Panel B prompt:
+tell the frontend to talk to the backend in accordance with these instructions and follow all addtiional instructions

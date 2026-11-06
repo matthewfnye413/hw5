@@ -1,0 +1,30 @@
+# --- Secrets: never commit a real .env (PORTKEY_API_KEY lives there) ---
+.env
+.env.local
+.env.*.local
+!.env.example
+# frontend/.env.development only holds the backend URL (no secrets), so it is committed.
+
+# --- Python ---
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# --- Node / frontend ---
+node_modules/
+frontend/dist/
+*.log
+
+# --- Temp files from the audit trail writer ---
+*.json.tmp
+output/audit_trail.corrupt-*.json
+
+# --- Local tool / editor settings ---
+.claude/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# NOTE: data/campus_customs.db and data/campus_customs_new.db ARE committed on purpose
+# (the assignment asks for both so graders can run the app).

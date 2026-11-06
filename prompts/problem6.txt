@@ -1,0 +1,7 @@
+Problem 6: Plan the three tickets
+
+Prompt:
+write the expectation and follow all additional instructions
+
+Panel B prompt:
+for each expected section, direct the boss to contact the appropriate agent/department

@@ -1,0 +1,7 @@
+Problem 7: Backend routes
+
+Prompt:
+add backend routes in accordance w the instructions
+
+Panel B prompt:
+from the backend folder start the server w this

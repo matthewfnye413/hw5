@@ -1,0 +1,27 @@
+Frontend -> backend connection (Problem 8 Panel B)
+
+frontend/.env            VITE_API_URL=http://localhost:8000
+frontend/src/api.ts      fetch(`${API_BASE}/api/...`), API_BASE defaults to http://localhost:8000
+backend/main.py CORS     allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"], methods GET/POST
+
+Terminal (frontend/):
+PS ...\AI_HW5\frontend> npm run dev
+  npm : File C:\Program Files\nodejs\npm.ps1 cannot be loaded because running scripts is disabled on this system.
+  (PowerShell script policy on this PC; npm.cmd runs the same script without changing the policy)
+PS ...\AI_HW5\frontend> npm.cmd run dev
+  > frontend@0.0.0 dev
+  > vite
+  VITE v6.4.5  ready in 415 ms
+  ->  Local:   http://localhost:5173/        (opens the desk in the browser)
+
+CORS check against the running backend:
+OPTIONS /api/approvals/1/approve  Origin: http://localhost:5173  -> 200, access-control-allow-origin: http://localhost:5173
+GET     /api/cash                 Origin: http://localhost:5173  -> 200, access-control-allow-origin: http://localhost:5173
+OPTIONS /api/reset                Origin: http://evil.example    -> 400 "Disallowed CORS origin"
+
+Browser network log on http://localhost:5173 (requests go straight to :8000, no proxy):
+GET http://localhost:8000/api/tickets  -> 200 OK
+GET http://localhost:8000/api/cash     -> 200 OK
+GET http://localhost:8000/api/approvals -> 200 OK
+GET http://localhost:8000/api/runs     -> 200 OK
+GET http://localhost:8000/api/events?ticket_id=101&limit=1000&current=true -> 200 OK

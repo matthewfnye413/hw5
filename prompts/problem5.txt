@@ -1,0 +1,7 @@
+Problem 5: Build the agent team and grow the MCP tools
+
+Prompt:
+build thew agentic team in accordance with these instructions
+
+Panel B prompt:
+add any tools the agents need in accordsance with these instructions
